@@ -120,7 +120,17 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
 
-    /* ===== NATIVE RTL FIXES (Removed manual flex reversals) ===== */
+    /* ===== NATIVE RTL FIXES ===== */
+    [dir="rtl"] .signup-card {
+      text-align: right;
+    }
+    [dir="rtl"] .signup-card h2,
+    [dir="rtl"] .signup-card .sub {
+      text-align: right;
+    }
+    [dir="rtl"] .logo {
+      justify-content: flex-start;
+    }
     [dir="rtl"] .form-group {
       text-align: right;
     }
@@ -182,7 +192,7 @@
       padding: 0 14px;
       transition: 0.2s;
       border: 2px solid transparent;
-      gap: 8px; /* Clean gap ensures proper spacing in both LTR & RTL */
+      gap: 8px;
     }
     .dark .form-group .input-wrap {
       background: #1f1a34;

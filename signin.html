@@ -267,7 +267,7 @@
       left: 16px;
     }
 
-    /* ===== OPTIONS ROW (Natively handled by flexbox in RTL) ===== */
+    /* ===== OPTIONS ROW ===== */
     .form-options {
       display: flex;
       justify-content: space-between;
@@ -331,43 +331,48 @@
     }
     .dark .signin-divider hr { border-top-color: #2a1f4a; }
 
+    /* ===== CIRCULAR SOCIAL LOGIN ICONS ===== */
     .social-login {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       margin-bottom: 24px;
     }
-    
-    .social-btn {
-      flex: 1;
-      background: transparent;
-      border: 2px solid #f0edf5;
-      border-radius: 60px;
-      padding: 0;
-      height: 48px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--text-primary);
+    .social-login a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f1f8;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+      transition: 0.3s;
+      border: 1px solid #e5e7eb;
     }
-    .dark .social-btn {
+    .dark .social-login a {
+      background: #1f1a34;
+      color: #f3f4f6;
       border-color: #2a1f4a;
     }
-    .social-btn:hover {
+    .social-login a:hover {
+      background: var(--brand-primary);
+      color: #fff;
+      transform: translateY(-3px);
       border-color: var(--brand-primary);
-      background: rgba(139, 92, 246, 0.05);
-      transform: translateY(-2px);
     }
-    .social-btn i { font-size: 1.1rem; }
-    .social-btn.google i { color: #EA4335; }
-    .social-btn.apple i { color: #000; }
-    body.dark .social-btn.apple i { color: #fff; }
+    .social-login a img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    /* Social icons color fix */
+    .fa-google { color: #EA4335; }
+    .fa-facebook-f { color: #1877F2; }
+    .fa-apple { color: #000000; }
+    body.dark .fa-apple { color: #ffffff; }
 
     /* Fix: Register Link Flex layout ensures stable display in RTL */
     .register-link {
@@ -454,12 +459,9 @@
   </div>
 
   <div class="social-login">
-    <button type="button" class="social-btn google" id="googleLogin">
-      <i class="fab fa-google"></i> <span>Google</span>
-    </button>
-    <button type="button" class="social-btn apple" id="appleLogin">
-      <i class="fab fa-apple"></i> <span>Apple</span>
-    </button>
+    <a href="#" aria-label="Google"><img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" width="20" height="20"></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" aria-label="Apple"><i class="fab fa-apple"></i></a>
   </div>
 
   <!-- Note: Wrapped text in a span to protect spacing and RTL jumping -->
