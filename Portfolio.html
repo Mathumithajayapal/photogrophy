@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensPro | Portfolio — Event Photography Studio</title>
+    <link rel="icon" type="image/jpeg" href="image/camera (1).jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --brand-primary: #8B5CF6;
+            --brand-secondary: #E8B4A0;
+            --brand-light: #A78BFA;
+            --brand-dark: #6D28D9;
+            --footer-bg: #1E1B2E;
+            --dark-bg: #0F0A1A;
+            --dark-card: #1A142F;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: #111827;
+            transition: 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark {
+            background-color: var(--dark-bg);
+            color: #f3f4f6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1a142f;
+        }
+
+        /* ===== HEADER / NAVBAR ===== */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .dark .header-nav {
+            background: rgba(15, 10, 26, 0.95);
+            border-bottom: 1px solid #2a1f4a;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+        }
+        .nav-section {
+            display: flex;
+            align-items: center;
+        }
+        .desktop-menu {
+            display: none;
+            gap: 20px;
+            font-weight: 500;
+        }
+        @media (min-width: 1024px) {
+            .desktop-menu {
+                display: flex;
+            }
+        }
+        .nav-controls {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+        @media (min-width: 1024px) {
+            .nav-controls {
+                display: flex;
+            }
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: var(--brand-secondary);
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+            padding: 5px 0;
+            border: 1px solid #f3f4f6;
+        }
+        .dark .dropdown-content {
+            background-color: var(--dark-card);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+            border-color: #2a1f4a;
+        }
+        .dropdown-content a {
+            color: #111827;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .dark .dropdown-content a {
+            color: #f3f4f6;
+        }
+        .dropdown-content a:hover {
+            background-color: #f9fafb;
+            color: var(--brand-primary);
+        }
+        .dark .dropdown-content a:hover {
+            background-color: #2a1f4a;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown>a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== MOBILE NAV DRAWER ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+        .mobile-nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1002;
+            transition: 0.3s;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .dark .mobile-nav-drawer {
+            background: var(--dark-bg);
+        }
+        .mobile-nav-overlay.open {
+            display: block;
+        }
+        .mobile-nav-drawer.open {
+            right: 0;
+        }
+        .mobile-btn {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        @media (min-width: 1024px) {
+            .mobile-btn {
+                display: none;
+            }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            padding: 10px 20px;
+            background: var(--brand-primary);
+            color: #fff;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        .btn-ghost {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dark .btn-ghost {
+            background: #1a142f;
+            color: white;
+        }
+        .btn-ghost:hover {
+            background: var(--brand-primary);
+            color: #fff;
+        }
+
+        .btn-outline {
+            padding: 12px 30px;
+            border: 2px solid var(--brand-primary);
+            border-radius: 50px;
+            color: var(--brand-primary);
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: var(--brand-primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+        }
+        .dark .btn-outline {
+            border-color: var(--brand-light);
+            color: var(--brand-light);
+        }
+        .dark .btn-outline:hover {
+            background: var(--brand-primary);
+            color: #fff;
+            border-color: var(--brand-primary);
+        }
+
+        .btn-gold {
+            padding: 14px 34px;
+            background: var(--brand-secondary);
+            color: #111827;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(232, 180, 160, 0.4);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+        .section-title span {
+            color: var(--brand-primary);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .dark .section-subtitle {
+            color: #a0aebb;
+        }
+
+        /* ============================================================= */
+        /* SECTION 1: PORTFOLIO HERO                                      */
+        /* ============================================================= */
+        .portfolio-hero {
+            padding: 160px 20px 90px;
+            background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 50%, #2D1B4E 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #fff;
+        }
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1600&h=900&fit=crop") center/cover;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .portfolio-hero .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+        }
+        .portfolio-hero .hero-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 180, 160, 0.15), transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            pointer-events: none;
+        }
+        .portfolio-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .portfolio-hero .hero-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--brand-light);
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .portfolio-hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .portfolio-hero h1 span {
+            color: var(--brand-secondary);
+        }
+        .portfolio-hero p {
+            font-size: 1.15rem;
+            opacity: 0.8;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            line-height: 1.7;
+        }
+        .portfolio-hero .hero-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .portfolio-hero .hero-stats-row .stat-item h3 {
+            font-size: 2.4rem;
+            color: var(--brand-secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        .portfolio-hero .hero-stats-row .stat-item p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-hero h1 {
+                font-size: 2.5rem;
+            }
+            .portfolio-hero .hero-stats-row {
+                gap: 25px;
+            }
+            .portfolio-hero .hero-stats-row .stat-item h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ============================================================= */
+        /* SECTION 2: FILTERABLE GALLERY                                  */
+        /* ============================================================= */
+        .gallery-section {
+            background: #faf5ff;
+        }
+        .dark .gallery-section {
+            background: var(--dark-bg);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 45px;
+        }
+        .filter-tabs button {
+            padding: 10px 28px;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            background: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #111827;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .dark .filter-tabs button {
+            background: var(--dark-card);
+            color: #f3f4f6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .filter-tabs button:hover {
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
+        .filter-tabs button.active {
+            background: var(--brand-primary);
+            color: #fff;
+            border-color: var(--brand-primary);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        .dark .filter-tabs button.active {
+            background: var(--brand-primary);
+            color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            group: true;
+        }
+        .dark .gallery-item {
+            background: var(--dark-card);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.15);
+        }
+        .gallery-item .img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+        .gallery-item .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover .img-wrap img {
+            transform: scale(1.05);
+        }
+        .gallery-item .img-wrap .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 10, 26, 0.7), transparent 60%);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+        .gallery-item:hover .img-wrap .overlay {
+            opacity: 1;
+        }
+        .gallery-item .img-wrap .overlay .badge {
+            background: var(--brand-secondary);
+            color: #111;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .gallery-item .info {
+            padding: 22px 25px 25px;
+        }
+        .gallery-item .info h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .gallery-item .info .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .dark .gallery-item .info .meta {
+            color: #a0aebb;
+        }
+        .gallery-item .info .meta .tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .gallery-item .info .meta .tags span {
+            background: #f3f4f6;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #555;
+        }
+        .dark .gallery-item .info .meta .tags span {
+            background: #2a1f4a;
+            color: #b0a8c8;
+        }
+
+        /* ============================================================= */
+        /* SECTION 3: FEATURED PROJECTS (SPOTLIGHT)                       */
+        /* ============================================================= */
+        .spotlight-section {
+            background: #fff;
+        }
+        .dark .spotlight-section {
+            background: var(--dark-bg);
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+        .spotlight-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+        }
+        .dark .spotlight-item {
+            background: var(--dark-card);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .spotlight-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.12);
+        }
+        .spotlight-item .spotlight-img {
+            height: 100%;
+            min-height: 340px;
+            background-size: cover;
+            background-position: center;
+        }
+        .spotlight-item .spotlight-body {
+            padding: 40px 40px 40px 10px;
+        }
+        .spotlight-item .spotlight-body .label {
+            display: inline-block;
+            background: var(--brand-primary);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .spotlight-item .spotlight-body h3 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .spotlight-item .spotlight-body h3 span {
+            color: var(--brand-primary);
+        }
+        .spotlight-item .spotlight-body p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .dark .spotlight-item .spotlight-body p {
+            color: #a0aebb;
+        }
+        .spotlight-item .spotlight-body .details {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+        .spotlight-item .spotlight-body .details div {
+            font-size: 0.85rem;
+        }
+        .spotlight-item .spotlight-body .details div strong {
+            display: block;
+            font-weight: 700;
+            color: #111;
+            font-size: 0.9rem;
+        }
+        .dark .spotlight-item .spotlight-body .details div strong {
+            color: #f3f4f6;
+        }
+        .spotlight-item .spotlight-body .details div span {
+            color: #888;
+        }
+        .dark .spotlight-item .spotlight-body .details div span {
+            color: #a0aebb;
+        }
+
+        @media (max-width: 900px) {
+            .spotlight-item {
+                grid-template-columns: 1fr;
+            }
+            .spotlight-item .spotlight-img {
+                min-height: 260px;
+            }
+            .spotlight-item .spotlight-body {
+                padding: 30px;
+            }
+            .spotlight-item .spotlight-body h3 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ============================================================= */
+        /* SECTION 4: CLIENT TESTIMONIALS (PORTFOLIO FOCUS) — REMOVED    */
+        /* ============================================================= */
+
+        /* ============================================================= */
+        /* SECTION 5: CTA / BOOK A SESSION                               */
+        /* ============================================================= */
+        .cta-section {
+            background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 60%, #2D1B4E 100%);
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("https://images.unsplash.com/photo-1558618666-fcd25c85f5b6?w=1600&h=600&fit=crop") center/cover;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        .cta-section .cta-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            top: -100px;
+            left: -100px;
+            pointer-events: none;
+        }
+        .cta-section .cta-glow-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 180, 160, 0.1), transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 16px;
+        }
+        .cta-content h2 span {
+            color: var(--brand-secondary);
+        }
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+        .cta-content .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .cta-content .cta-buttons .btn-primary {
+            padding: 16px 38px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+        }
+        .cta-content .cta-buttons .btn-outline-light {
+            padding: 16px 38px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 1rem;
+        }
+        .cta-content .cta-buttons .btn-outline-light:hover {
+            background: #fff;
+            color: #111827;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(255, 255, 255, 0.15);
+        }
+        .cta-content .cta-stats-mini {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .cta-content .cta-stats-mini div {
+            text-align: center;
+        }
+        .cta-content .cta-stats-mini div strong {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--brand-secondary);
+            font-family: 'Inter', sans-serif;
+        }
+        .cta-content .cta-stats-mini div span {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            .cta-content .cta-stats-mini {
+                gap: 20px;
+            }
+        }
+
+        /* ============================================================= */
+        /* FOOTER (exact match)                                           */
+        /* ============================================================= */
+        footer {
+            background: var(--footer-bg);
+            color: #a0aebb;
+            padding: 80px 20px;
+            margin-top: auto;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .footer-title {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-list {
+            list-style: none;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-list li a {
+            transition: var(--transition);
+        }
+        .footer-list li a:hover {
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo i {
+            color: var(--brand-secondary);
+        }
+        .footer-grid>div:first-child p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #2a1f4a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .footer-social a:hover {
+            background: var(--brand-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ===== ACTIVE NAV LINK ===== */
+        .desktop-menu a {
+            position: relative;
+            color: inherit;
+            transition: var(--transition);
+        }
+        .desktop-menu a:hover {
+            color: var(--brand-primary);
+        }
+        .desktop-menu a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+        }
+        .desktop-menu a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 3px;
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        .mobile-nav-drawer a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        /* ===== RTL SUPPORT ===== */
+        [dir="rtl"] .desktop-menu a.active::after {
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .testimonial-card .quote-icon {
+            right: auto;
+            left: 25px;
+        }
+        [dir="rtl"] .spotlight-item .spotlight-body {
+            padding: 40px 10px 40px 40px;
+        }
+        @media (max-width: 900px) {
+            [dir="rtl"] .spotlight-item .spotlight-body {
+                padding: 30px;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-up {
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        /* ===== RESPONSIVE TWEAKS ===== */
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-tabs button {
+                padding: 8px 18px;
+                font-size: 0.8rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================================= -->
+    <!-- HEADER / NAVBAR (exact match)                             -->
+    <!-- ========================================================= -->
+    <header class="header-nav">
+        <nav class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+
+            <div class="desktop-menu">
+                <div class="dropdown">
+                    <a href="#">Home <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html">Home 1</a>
+                        <a href="home2.html">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="services.html">Services</a>
+                <a href="packages.html">Packages</a>
+        <a href="booking.html">Booking</a>
+
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-controls">
+                <button id="themeToggle" class="btn-ghost"><i class="fas fa-moon"></i></button>
+                <button id="rtlToggle" class="btn-ghost" style="font-weight: bold; font-size: 0.7rem;">RTL</button>
+                <a href="signin.html" class="btn-primary">LOG IN</a>
+            </div>
+
+            <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-overlay" id="navOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+        <button id="closeDrawer" style="background:none; border:none; font-size:1.5rem; align-self:flex-end; color:var(--brand-primary);">✕</button>
+        <a href="index.html" >Home1</a>
+        <a href="home2.html" >Home2</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="services.html">Services</a>
+        <a href="packages.html">Packages</a>
+<a href="booking.html">Booking</a>
+
+        <a href="contact.html">Contact</a>
+        <div style="margin-top: auto; border-top: 1px solid #e5e7eb; padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <button id="mobileThemeToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle Theme</button>
+            <button id="mobileRtlToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle RTL</button>
+            <a href="signin.html" class="btn-primary" style="text-align: center;">LOG IN</a>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 1: PORTFOLIO HERO                                  -->
+    <!-- ========================================================= -->
+    <section class="portfolio-hero">
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        <div class="portfolio-hero-content fade-up">
+            <div class="hero-badge"><i class="fas fa-images"></i> &nbsp;Our Visual Archive</div>
+            <h1>Where <span>Moments</span> Become <br>Masterpieces</h1>
+            <p>Every image tells a story. Explore our curated collection of weddings, corporate events, portraits, and festivals — each frame crafted with passion and precision.</p>
+            <div class="hero-stats-row">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Events Covered</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Satisfaction Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>12+</h3>
+                    <p>Industry Awards</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4.9★</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2: FILTERABLE GALLERY                              -->
+    <!-- ========================================================= -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Our <span>Gallery</span></h2>
+            <p class="section-subtitle">Browse through our work across different genres. Click on any image to explore the full story.</p>
+
+            <div class="filter-tabs" id="filterTabs">
+                <button class="active" data-filter="all">All Work</button>
+                <button data-filter="wedding">Wedding</button>
+                <button data-filter="corporate">Corporate</button>
+                <button data-filter="portrait">Portrait</button>
+                <button data-filter="festival">Festival</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Items will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 3: FEATURED PROJECTS (SPOTLIGHT)                   -->
+    <!-- ========================================================= -->
+    <section class="spotlight-section">
+        <div class="container">
+            <h2 class="section-title">Featured <span>Projects</span></h2>
+            <p class="section-subtitle">A closer look at some of our most memorable assignments that pushed the boundaries of creativity.</p>
+
+            <div class="spotlight-grid">
+
+                <div class="spotlight-item fade-up">
+                    <div class="spotlight-img" style="background-image: url('image/visual (1).jpg');"></div>
+                    <div class="spotlight-body">
+                        <span class="label">Wedding</span>
+                        <h3>Riverside <span>Elegance</span></h3>
+                        <p>A breathtaking outdoor wedding by the river, where golden hour light and candid emotions merged into timeless frames. We captured every tear, laugh, and dance.</p>
+                        <div class="details">
+                            <div><strong>Client</strong><span>Emily & David</span></div>
+                            <div><strong>Location</strong><span>Sonoma, CA</span></div>
+                            <div><strong>Year</strong><span>2025</span></div>
+                        </div>
+                        <a href="#" class="btn-outline" style="font-size:0.85rem;">View Full Project</a>
+                    </div>
+                </div>
+
+                <div class="spotlight-item fade-up" style="direction: ltr;">
+                    <div class="spotlight-body" style="padding: 40px 10px 40px 40px;">
+                        <span class="label">Corporate</span>
+                        <h3>Gala <span>Under the Stars</span></h3>
+                        <p>An annual awards gala for a Fortune 500 company — dynamic stage lighting, red-carpet glamour, and intimate guest portraits that radiate sophistication.</p>
+                        <div class="details">
+                            <div><strong>Client</strong><span>TechVision Inc.</span></div>
+                            <div><strong>Location</strong><span>New York, NY</span></div>
+                            <div><strong>Year</strong><span>2025</span></div>
+                        </div>
+                        <a href="#" class="btn-outline" style="font-size:0.85rem;">View Full Project</a>
+                    </div>
+                    <div class="spotlight-img" style="background-image: url('image/visual (2).jpg');"></div>
+                </div>
+
+                <div class="spotlight-item fade-up">
+                    <div class="spotlight-img" style="background-image: url('image/photos (10).jpg');"></div>
+                    <div class="spotlight-body">
+                        <span class="label">Festival</span>
+                        <h3>Electric <span>Vibes</span></h3>
+                        <p>High-energy music festival coverage with vibrant colors, crowd interactions, and backstage moments. We captured the raw spirit of the event from sunrise to sunset.</p>
+                        <div class="details">
+                            <div><strong>Client</strong><span>SummerBeat Fest</span></div>
+                            <div><strong>Location</strong><span>Austin, TX</span></div>
+                            <div><strong>Year</strong><span>2025</span></div>
+                        </div>
+                        <a href="#" class="btn-outline" style="font-size:0.85rem;">View Full Project</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 4: CLIENT TESTIMONIALS — REMOVED                  -->
+    <!-- ========================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- SECTION 5: CALL TO ACTION                                  -->
+    <!-- ========================================================= -->
+    <section class="cta-section">
+        <div class="cta-glow"></div>
+        <div class="cta-glow-2"></div>
+        <div class="cta-content">
+            <h2>Ready to <span>Create</span> Your <br>Visual Story?</h2>
+            <p>Let's collaborate and turn your vision into stunning imagery. Whether it's a wedding, corporate gala, or personal portrait — we're here to bring it to life.</p>
+            <div class="cta-buttons">
+                <a href="book.html" class="btn-primary"><i class="fas fa-calendar-check"></i> &nbsp;Book a Session</a>
+                <a href="contact.html" class="btn-outline-light"><i class="fas fa-comment"></i> &nbsp;Get in Touch</a>
+            </div>
+            <div class="cta-stats-mini">
+                <div>
+                    <strong>50+</strong>
+                    <span>Weddings / Year</span>
+                </div>
+                <div>
+                    <strong>120+</strong>
+                    <span>Corporate Events</span>
+                </div>
+                <div>
+                    <strong>4.9★</strong>
+                    <span>Average Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER (exact match)                                       -->
+    <!-- ========================================================= -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+                <p style="font-size: 0.9rem; line-height: 1.6;">Where artistry meets professionalism. We capture the moments that matter most, creating timeless visual stories for weddings, corporate events, and personal milestones.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="#">Packages</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Support</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-list">
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-envelope"></i> hello@lenspro.com</li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 0.8rem; border-top: 1px solid #2a1f4a; padding-top: 20px;">
+            © 2026 LensPro. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- SCRIPTS                                                    -->
+    <!-- ========================================================= -->
+    <script>
+        // ===== THEME TOGGLE =====
+        const toggleTheme = () => {
+            document.body.classList.toggle('dark');
+            const icon = document.querySelector('#themeToggle i');
+            if (document.body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        };
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('mobileThemeToggle').addEventListener('click', toggleTheme);
+
+        // ===== RTL TOGGLE =====
+        const toggleRTL = () => {
+            document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+        };
+        document.getElementById('rtlToggle').addEventListener('click', toggleRTL);
+        document.getElementById('mobileRtlToggle').addEventListener('click', toggleRTL);
+
+        // ===== MOBILE MENU =====
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeDrawer');
+        const drawer = document.getElementById('mobileDrawer');
+        const overlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        const closeMenu = () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+        };
+
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // ===== GALLERY DATA =====
+        const galleryData = [{
+            id: 1,
+            title: "Riverside Wedding",
+            category: "wedding",
+            img: "image/photos (3).jpg",
+            tags: ["Candid", "Golden Hour"]
+        }, {
+            id: 2,
+            title: "Corporate Awards Gala",
+            category: "corporate",
+            img: "image/photos (8).jpg",
+            tags: ["Red Carpet", "Stage"]
+        }, {
+            id: 3,
+            title: "Music Festival Crowd",
+            category: "festival",
+            img: "image/photos (2).jpg",
+            tags: ["Colorful", "High Energy"]
+        }, {
+            id: 4,
+            title: "Executive Portraits",
+            category: "portrait",
+            img: "image/photos (4).jpg",
+            tags: ["Studio", "Professional"]
+        }, {
+            id: 5,
+            title: "Intimate Wedding Ceremony",
+            category: "wedding",
+            img: "image/photos (5).jpg",
+            tags: ["Romantic", "Outdoor"]
+        }, {
+            id: 6,
+            title: "Tech Conference Keynote",
+            category: "corporate",
+            img: "image/photos (15).jpg",
+            tags: ["Stage", "Audience"]
+        }, {
+            id: 7,
+            title: "Festival Backstage",
+            category: "festival",
+            img: "image/photos (9).jpg",
+            tags: ["Behind the Scenes", "Artists"]
+        }, {
+            id: 8,
+            title: "Branding Headshot",
+            category: "portrait",
+            img: "image/photos (6).jpg",
+            tags: ["Headshot", "Personal Brand"]
+        }, {
+            id: 9,
+            title: "Gala Dinner Moments",
+            category: "corporate",
+            img: "image/photos (13).jpg",
+            tags: ["Elegant", "Candid"]
+        }];
+
+        // ===== RENDER GALLERY =====
+        const grid = document.getElementById('galleryGrid');
+
+        function renderGallery(filter = 'all') {
+            const filtered = filter === 'all' ? galleryData : galleryData.filter(item => item.category === filter);
+            grid.innerHTML = filtered.map(item => `
+                    <div class="gallery-item" data-category="${item.category}">
+                        <div class="img-wrap">
+                            <img src="${item.img}" alt="${item.title}" loading="lazy">
+                            <div class="overlay">
+                                <span class="badge">${item.category}</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h3>${item.title}</h3>
+                            <div class="meta">
+                                <div class="tags">
+                                    ${item.tags.map(t => `<span>${t}</span>`).join('')}
+                                </div>
+                                <span><i class="fas fa-expand-alt" style="opacity:0.4;"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        renderGallery();
+
+        // ===== FILTER TABS =====
+        const tabs = document.querySelectorAll('.filter-tabs button');
+        tabs.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabs.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.dataset.filter;
+                renderGallery(filter);
+            });
+        });
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

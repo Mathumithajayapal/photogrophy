@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensPro | Event Photography Studio</title>
+    <link rel="icon" type="image/jpeg" href="image/camera (1).jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --brand-primary: #8B5CF6;
+            --brand-secondary: #E8B4A0;
+            --brand-light: #A78BFA;
+            --brand-dark: #6D28D9;
+            --footer-bg: #1E1B2E;
+            --dark-bg: #0F0A1A;
+            --dark-card: #1A142F;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: #111827;
+            transition: 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.dark {
+            background-color: var(--dark-bg);
+            color: #f3f4f6;
+        }
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== HEADER / NAVBAR ===== */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .dark .header-nav {
+            background: rgba(15, 10, 26, 0.95);
+            border-bottom: 1px solid #2a1f4a;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+        }
+        .nav-section {
+            display: flex;
+            align-items: center;
+        }
+        .desktop-menu {
+            display: none;
+            gap: 20px;
+            font-weight: 500;
+        }
+        @media (min-width: 1024px) {
+            .desktop-menu {
+                display: flex;
+            }
+        }
+        .nav-controls {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+        @media (min-width: 1024px) {
+            .nav-controls {
+                display: flex;
+            }
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: var(--brand-secondary);
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+            padding: 5px 0;
+            border: 1px solid #f3f4f6;
+        }
+        .dark .dropdown-content {
+            background-color: var(--dark-card);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+            border-color: #2a1f4a;
+        }
+        .dropdown-content a {
+            color: #111827;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .dark .dropdown-content a {
+            color: #f3f4f6;
+        }
+        .dropdown-content a:hover {
+            background-color: #f9fafb;
+            color: var(--brand-primary);
+        }
+        .dark .dropdown-content a:hover {
+            background-color: #2a1f4a;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown>a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== MOBILE NAV DRAWER ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+        .mobile-nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1002;
+            transition: 0.3s;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .dark .mobile-nav-drawer {
+            background: var(--dark-bg);
+        }
+        .mobile-nav-overlay.open {
+            display: block;
+        }
+        .mobile-nav-drawer.open {
+            right: 0;
+        }
+        .mobile-btn {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        @media (min-width: 1024px) {
+            .mobile-btn {
+                display: none;
+            }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            padding: 10px 20px;
+            background: var(--brand-primary);
+            color: #fff;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        .btn-ghost {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dark .btn-ghost {
+            background: #1a142f;
+            color: white;
+        }
+        .btn-ghost:hover {
+            background: var(--brand-primary);
+            color: #fff;
+        }
+        .hero-outline-btn {
+            padding: 12px 28px;
+            border: 2px solid #fff;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            transition: .3s;
+            display: inline-block;
+        }
+        .hero-outline-btn:hover {
+            background: #fff;
+            color: var(--brand-primary);
+        }
+
+        /* ===== HERO BANNER ===== */
+        .hero {
+            height: 100vh;
+            background: url("image/banner (4).jpg") center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            color: #fff;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: var(--brand-secondary);
+            color: #111;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+        .hero h1 span {
+            color: var(--brand-secondary);
+        }
+        .hero p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .hero-buttons .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 34px;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            transition: .35s ease;
+            box-shadow: 0 12px 30px rgba(139, 92, 246, .35);
+        }
+
+        .hero-buttons .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(139, 92, 246, .5);
+        }
+
+        .hero-buttons .hero-outline-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 34px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #FCD34D;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            transition: .35s ease;
+        }
+
+        .hero-buttons .hero-outline-btn:hover {
+            background: #E8B4A0;
+            color: #111827;
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(252, 211, 77, .45);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .hero-stats h2 {
+            font-size: 2rem;
+            color: var(--brand-secondary);
+        }
+        .hero-stats span {
+            font-size: .95rem;
+        }
+
+        @media(max-width:768px) {
+            .hero {
+                height: auto;
+                padding: 170px 20px 90px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .hero-outline-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 20px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .section-title span {
+            color: var(--brand-primary);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+        }
+        .dark .section-subtitle {
+            color: #a0aebb;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-section {
+            background: #ffffff;
+        }
+        .dark .pricing-section {
+            background: var(--dark-bg);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+        .pricing-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 30px 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .07);
+            transition: 0.35s;
+            border: 2px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+            position: relative;
+        }
+        .dark .pricing-card {
+            background: var(--dark-card);
+            border-color: #2a1f4a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--brand-primary);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.18);
+        }
+        .pricing-card.popular {
+            border-color: var(--brand-primary);
+            background: linear-gradient(145deg, #faf5ff, #ffffff);
+        }
+        .dark .pricing-card.popular {
+            background: linear-gradient(145deg, #1A142F, #0F0A1A);
+            border-color: var(--brand-primary);
+        }
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand-primary);
+            color: #fff;
+            padding: 6px 24px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .pricing-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .pricing-price {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        .pricing-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #888;
+        }
+        .dark .pricing-price small {
+            color: #a0aebb;
+        }
+        .pricing-desc {
+            text-align: center;
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .dark .pricing-desc {
+            color: #a0aebb;
+            border-bottom-color: #2a1f4a;
+        }
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 28px 0;
+            flex: 1;
+        }
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 0.95rem;
+            color: #333;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .dark .pricing-features li {
+            color: #e5e7eb;
+            border-bottom-color: #2a1f4a;
+        }
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        .pricing-features li i {
+            color: var(--brand-primary);
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .pricing-features li .fa-times {
+            color: #e74c3c;
+        }
+        .dark .pricing-features li .fa-times {
+            color: #e74c3c;
+        }
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            text-align: center;
+            background: var(--brand-primary);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: auto;
+        }
+        .pricing-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--footer-bg);
+            color: #a0aebb;
+            padding: 80px 20px;
+            margin-top: auto;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .footer-title {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-list {
+            list-style: none;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-list li a {
+            transition: 0.3s;
+        }
+        .footer-list li a:hover {
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo i {
+            color: var(--brand-secondary);
+        }
+        .footer-grid>div:first-child p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #2a1f4a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .footer-social a:hover {
+            background: var(--brand-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ===== ACTIVE NAV LINK ===== */
+        .desktop-menu a {
+            position: relative;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .desktop-menu a:hover {
+            color: var(--brand-primary);
+        }
+
+        .desktop-menu a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+        }
+
+        .desktop-menu a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 3px;
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        .mobile-nav-drawer a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        /* ===== RTL SUPPORT ===== */
+        [dir="rtl"] .desktop-menu a.active::after {
+            left: auto;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================================= -->
+    <!-- HEADER / NAVBAR                                           -->
+    <!-- ========================================================= -->
+    <header class="header-nav">
+        <nav class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+
+            <div class="desktop-menu">
+                <div class="dropdown">
+                    <a href="#">Home <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html">Home 1</a>
+                        <a href="home2.html">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="services.html">Services</a>
+                <a href="packages.html" class="active">Packages</a>
+        <a href="booking.html">Booking</a>
+
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-controls">
+                <button id="themeToggle" class="btn-ghost"><i class="fas fa-moon"></i></button>
+                <button id="rtlToggle" class="btn-ghost" style="font-weight: bold; font-size: 0.7rem;">RTL</button>
+                <a href="signin.html" class="btn-primary">LOG IN</a>
+            </div>
+
+            <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-overlay" id="navOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+        <button id="closeDrawer" style="background:none; border:none; font-size:1.5rem; align-self:flex-end; color:var(--brand-primary);">✕</button>
+        <a href="index.html">Home1</a>
+        <a href="home2.html">Home2</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="services.html">Services</a>
+        <a href="packages.html" class="active">Packages</a>
+<a href="booking.html">Booking</a>
+
+        <a href="contact.html">Contact</a>
+        <div style="margin-top: auto; border-top: 1px solid #e5e7eb; padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <button id="mobileThemeToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle Theme</button>
+            <button id="mobileRtlToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle RTL</button>
+            <a href="signin.html" class="btn-primary" style="text-align: center;">LOG IN</a>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 1: HERO BANNER                                    -->
+    <!-- ========================================================= -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag">📸 Capturing Life's Finest Moments</span>
+            <h1>Where Every <span>Frame</span> Tells<br>Your Story</h1>
+            <p>
+                From weddings to corporate galas, we bring your vision to life with
+                artistry, precision, and a passion for storytelling through photography.
+            </p>
+            <div class="hero-buttons">
+                <a href="portfolio.html" class="btn-primary">
+                    <i class="fas fa-images"></i>&nbsp; View Portfolio
+                </a>
+                <a href="packages.html" class="hero-outline-btn">
+                    <i class="fas fa-camera-retro"></i>&nbsp; Explore Packages
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <h2>500+</h2>
+                    <span>Events Covered</span>
+                </div>
+                <div>
+                    <h2>98%</h2>
+                    <span>Client Satisfaction</span>
+                </div>
+                <div>
+                    <h2>12+</h2>
+                    <span>Awards Won</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2: PRICING PLANS                                  -->
+    <!-- ========================================================= -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Choose Your <span>Plan</span></h2>
+            <p class="section-subtitle">Flexible pricing tailored to your event needs.</p>
+            <div class="pricing-grid">
+
+                <!-- Plan 1: Starter -->
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-price">$299 <small>/event</small></div>
+                    <div class="pricing-desc">Perfect for intimate gatherings and small events.</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 2 hours coverage</li>
+                        <li><i class="fas fa-check"></i> 50 edited photos</li>
+                        <li><i class="fas fa-check"></i> Online gallery</li>
+                        <li><i class="fas fa-check"></i> Digital download</li>
+                        <li><i class="fas fa-times"></i> Second shooter</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+                <!-- Plan 2: Professional (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-name">Professional</div>
+                    <div class="pricing-price">$599 <small>/event</small></div>
+                    <div class="pricing-desc">Our go-to package for weddings and corporate events.</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 4 hours coverage</li>
+                        <li><i class="fas fa-check"></i> 150 edited photos</li>
+                        <li><i class="fas fa-check"></i> Online gallery + USB</li>
+                        <li><i class="fas fa-check"></i> Digital download</li>
+                        <li><i class="fas fa-check"></i> Second shooter</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+                <!-- Plan 3: Premium -->
+                <div class="pricing-card">
+                    <div class="pricing-name">Premium</div>
+                    <div class="pricing-price">$999 <small>/event</small></div>
+                    <div class="pricing-desc">Full-service coverage for large-scale events.</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 8 hours coverage</li>
+                        <li><i class="fas fa-check"></i> 300+ edited photos</li>
+                        <li><i class="fas fa-check"></i> Online gallery + USB + print</li>
+                        <li><i class="fas fa-check"></i> Digital download</li>
+                        <li><i class="fas fa-check"></i> Second shooter + assistant</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER                                                    -->
+    <!-- ========================================================= -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+                <p style="font-size: 0.9rem; line-height: 1.6;">Where artistry meets professionalism. We capture the moments that matter most, creating timeless visual stories for weddings, corporate events, and personal milestones.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Packages</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Support</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-list">
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-envelope"></i> hello@lenspro.com</li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 0.8rem; border-top: 1px solid #2a1f4a; padding-top: 20px;">
+            © 2026 LensPro. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- SCRIPTS                                                   -->
+    <!-- ========================================================= -->
+    <script>
+        // Toggle Theme
+        const toggleTheme = () => {
+            document.body.classList.toggle('dark');
+            const icon = document.querySelector('#themeToggle i');
+            if (document.body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        };
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('mobileThemeToggle').addEventListener('click', toggleTheme);
+
+        // Toggle RTL
+        const toggleRTL = () => {
+            document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+        };
+        document.getElementById('rtlToggle').addEventListener('click', toggleRTL);
+        document.getElementById('mobileRtlToggle').addEventListener('click', toggleRTL);
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeDrawer');
+        const drawer = document.getElementById('mobileDrawer');
+        const overlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        const closeMenu = () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+        };
+
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    </script>
+
+</body>
+
+</html>

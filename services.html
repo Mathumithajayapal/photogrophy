@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensPro | Services — Event Photography Studio</title>
+    <link rel="icon" type="image/jpeg" href="image/camera (1).jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --brand-primary: #8B5CF6;
+            --brand-secondary: #E8B4A0;
+            --brand-light: #A78BFA;
+            --brand-dark: #6D28D9;
+            --footer-bg: #1E1B2E;
+            --dark-bg: #0F0A1A;
+            --dark-card: #1A142F;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: #111827;
+            transition: 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark {
+            background-color: var(--dark-bg);
+            color: #f3f4f6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1a142f;
+        }
+
+        /* ===== HEADER / NAVBAR ===== */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .dark .header-nav {
+            background: rgba(15, 10, 26, 0.95);
+            border-bottom: 1px solid #2a1f4a;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+        }
+        .nav-section {
+            display: flex;
+            align-items: center;
+        }
+        .desktop-menu {
+            display: none;
+            gap: 20px;
+            font-weight: 500;
+        }
+        @media (min-width: 1024px) {
+            .desktop-menu {
+                display: flex;
+            }
+        }
+        .nav-controls {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+        @media (min-width: 1024px) {
+            .nav-controls {
+                display: flex;
+            }
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: var(--brand-secondary);
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+            padding: 5px 0;
+            border: 1px solid #f3f4f6;
+        }
+        .dark .dropdown-content {
+            background-color: var(--dark-card);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+            border-color: #2a1f4a;
+        }
+        .dropdown-content a {
+            color: #111827;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .dark .dropdown-content a {
+            color: #f3f4f6;
+        }
+        .dropdown-content a:hover {
+            background-color: #f9fafb;
+            color: var(--brand-primary);
+        }
+        .dark .dropdown-content a:hover {
+            background-color: #2a1f4a;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown>a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== MOBILE NAV DRAWER ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+        .mobile-nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1002;
+            transition: 0.3s;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .dark .mobile-nav-drawer {
+            background: var(--dark-bg);
+        }
+        .mobile-nav-overlay.open {
+            display: block;
+        }
+        .mobile-nav-drawer.open {
+            right: 0;
+        }
+        .mobile-btn {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        @media (min-width: 1024px) {
+            .mobile-btn {
+                display: none;
+            }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            padding: 10px 20px;
+            background: var(--brand-primary);
+            color: #fff;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        .btn-ghost {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dark .btn-ghost {
+            background: #1a142f;
+            color: white;
+        }
+        .btn-ghost:hover {
+            background: var(--brand-primary);
+            color: #fff;
+        }
+
+        .btn-outline {
+            padding: 12px 30px;
+            border: 2px solid var(--brand-primary);
+            border-radius: 50px;
+            color: var(--brand-primary);
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: var(--brand-primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+        }
+        .dark .btn-outline {
+            border-color: var(--brand-light);
+            color: var(--brand-light);
+        }
+        .dark .btn-outline:hover {
+            background: var(--brand-primary);
+            color: #fff;
+            border-color: var(--brand-primary);
+        }
+
+        .btn-gold {
+            padding: 14px 34px;
+            background: var(--brand-secondary);
+            color: #111827;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(232, 180, 160, 0.4);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+        .section-title span {
+            color: var(--brand-primary);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .dark .section-subtitle {
+            color: #a0aebb;
+        }
+
+        /* ===== ACTIVE NAV LINK ===== */
+        .desktop-menu a {
+            position: relative;
+            color: inherit;
+            transition: var(--transition);
+        }
+        .desktop-menu a:hover {
+            color: var(--brand-primary);
+        }
+        .desktop-menu a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+        }
+        .desktop-menu a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 3px;
+            background: var(--brand-primary);
+            border-radius: 10px;
+        }
+        .mobile-nav-drawer a.active {
+            color: var(--brand-primary);
+            font-weight: 700;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        /* ===== RTL SUPPORT ===== */
+        [dir="rtl"] .desktop-menu a.active::after {
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .spotlight-item .spotlight-body {
+            padding: 40px 10px 40px 40px;
+        }
+        @media (max-width: 900px) {
+            [dir="rtl"] .spotlight-item .spotlight-body {
+                padding: 30px;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-up {
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        /* ============================================================= */
+        /* SERVICES HERO                                                  */
+        /* ============================================================= */
+        .services-hero {
+            padding: 160px 20px 90px;
+            background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 50%, #2D1B4E 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #fff;
+        }
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("image/banner (2).jpg") center/cover;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        .services-hero .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+        }
+        .services-hero .hero-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 180, 160, 0.15), transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            pointer-events: none;
+        }
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .services-hero .hero-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--brand-light);
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .services-hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .services-hero h1 span {
+            color: var(--brand-secondary);
+        }
+        .services-hero p {
+            font-size: 1.15rem;
+            opacity: 0.8;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* ============================================================= */
+        /* SERVICES CARDS — 6 UNIQUE DESIGNS                             */
+        /* ============================================================= */
+        .services-section {
+            background: #faf5ff;
+        }
+        .dark .services-section {
+            background: var(--dark-bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 1200px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        /* ---- Base Card ---- */
+        .service-card {
+            border-radius: 24px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .dark .service-card {
+            background: var(--dark-card);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .service-card .card-media {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card .card-media .card-icon-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card .card-body {
+            padding: 30px 28px 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card .card-body h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .service-card .card-body p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        .dark .service-card .card-body p {
+            color: #a0aebb;
+        }
+        .service-card .card-body .price-tag {
+            display: inline-block;
+            margin-top: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--brand-primary);
+        }
+        .dark .service-card .card-body .price-tag {
+            color: var(--brand-light);
+        }
+        .service-card .card-body .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid #f3f4f6;
+        }
+        .dark .service-card .card-body .card-footer {
+            border-top-color: #2a1f4a;
+        }
+        .service-card .card-body .card-footer .btn-small {
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--brand-primary);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .service-card .card-body .card-footer .btn-small:hover {
+            opacity: 0.85;
+            transform: translateX(4px);
+        }
+        .service-card .card-body .card-footer .feature-list {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .dark .service-card .card-body .card-footer .feature-list {
+            color: #a0aebb;
+        }
+        .service-card .card-body .card-footer .feature-list i {
+            color: var(--brand-primary);
+            margin-right: 4px;
+        }
+
+        /* ---- UNIQUE CARD VARIATIONS ---- */
+
+        /* Card 1: Wedding — Elegant with gold accent */
+        .service-card.style-wedding .card-media {
+            background-image: url('image/photos (11).jpg');
+        }
+        .service-card.style-wedding .card-icon-overlay {
+            background: linear-gradient(135deg, #E8B4A0, #D4947A);
+        }
+        .service-card.style-wedding .card-body h3 {
+            color: #D4947A;
+        }
+        .dark .service-card.style-wedding .card-body h3 {
+            color: var(--brand-secondary);
+        }
+        .service-card.style-wedding .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #E8B4A0, #D4947A);
+        }
+
+        /* Card 2: Corporate — Sleek, blue-toned */
+        .service-card.style-corporate .card-media {
+            background-image: url('image/photos (7).jpg');
+        }
+        .service-card.style-corporate .card-icon-overlay {
+            background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+        }
+        .service-card.style-corporate .card-body h3 {
+            color: #1D4ED8;
+        }
+        .dark .service-card.style-corporate .card-body h3 {
+            color: #60A5FA;
+        }
+        .service-card.style-corporate .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+        }
+
+        /* Card 3: Portrait — Artistic, warm */
+        .service-card.style-portrait .card-media {
+            background-image: url('image/photos (14).jpg');
+        }
+        .service-card.style-portrait .card-icon-overlay {
+            background: linear-gradient(135deg, #EC4899, #BE185D);
+        }
+        .service-card.style-portrait .card-body h3 {
+            color: #BE185D;
+        }
+        .dark .service-card.style-portrait .card-body h3 {
+            color: #F472B6;
+        }
+        .service-card.style-portrait .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #EC4899, #BE185D);
+        }
+
+        /* Card 4: Festival — Vibrant, neon */
+        .service-card.style-festival .card-media {
+            background-image: url('image/concert.jpg');
+        }
+        .service-card.style-festival .card-icon-overlay {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+        }
+        .service-card.style-festival .card-body h3 {
+            color: #D97706;
+        }
+        .dark .service-card.style-festival .card-body h3 {
+            color: #FBBF24;
+        }
+        .service-card.style-festival .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+        }
+
+        /* Card 5: Product — Clean, minimalist */
+        .service-card.style-product .card-media {
+            background-image: url('image/product photo.jpg');
+        }
+        .service-card.style-product .card-icon-overlay {
+            background: linear-gradient(135deg, #10B981, #047857);
+        }
+        .service-card.style-product .card-body h3 {
+            color: #047857;
+        }
+        .dark .service-card.style-product .card-body h3 {
+            color: #34D399;
+        }
+        .service-card.style-product .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #10B981, #047857);
+        }
+
+        /* Card 6: Documentary — Storytelling, deep */
+        .service-card.style-documentary .card-media {
+            background-image: url('image/photos (1).jpg');
+        }
+        .service-card.style-documentary .card-icon-overlay {
+            background: linear-gradient(135deg, #8B5CF6, #5B21B6);
+        }
+        .service-card.style-documentary .card-body h3 {
+            color: #5B21B6;
+        }
+        .dark .service-card.style-documentary .card-body h3 {
+            color: #A78BFA;
+        }
+        .service-card.style-documentary .card-body .card-footer .btn-small {
+            background: linear-gradient(135deg, #8B5CF6, #5B21B6);
+        }
+
+        /* ---- Hover effects per card ---- */
+        .service-card.style-wedding:hover {
+            box-shadow: 0 25px 60px rgba(232, 180, 160, 0.25);
+        }
+        .service-card.style-corporate:hover {
+            box-shadow: 0 25px 60px rgba(59, 130, 246, 0.2);
+        }
+        .service-card.style-portrait:hover {
+            box-shadow: 0 25px 60px rgba(236, 72, 153, 0.2);
+        }
+        .service-card.style-festival:hover {
+            box-shadow: 0 25px 60px rgba(245, 158, 11, 0.2);
+        }
+        .service-card.style-product:hover {
+            box-shadow: 0 25px 60px rgba(16, 185, 129, 0.2);
+        }
+        .service-card.style-documentary:hover {
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.25);
+        }
+
+        /* ============================================================= */
+        /* WHY US / FEATURES STRIP                                        */
+        /* ============================================================= */
+        .features-strip {
+            background: #fff;
+            padding: 70px 20px;
+        }
+        .dark .features-strip {
+            background: var(--dark-bg);
+        }
+        .features-strip .strip-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .features-strip .strip-item i {
+            font-size: 2.5rem;
+            color: var(--brand-primary);
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+        .features-strip .strip-item h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .features-strip .strip-item p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .dark .features-strip .strip-item p {
+            color: #a0aebb;
+        }
+
+        /* ============================================================= */
+        /* CTA SECTION (matching portfolio page)                         */
+        /* ============================================================= */
+        .cta-section {
+            background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 60%, #2D1B4E 100%);
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("https://images.unsplash.com/photo-1558618666-fcd25c85f5b6?w=1600&h=600&fit=crop") center/cover;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        .cta-section .cta-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            top: -100px;
+            left: -100px;
+            pointer-events: none;
+        }
+        .cta-section .cta-glow-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 180, 160, 0.1), transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 16px;
+        }
+        .cta-content h2 span {
+            color: var(--brand-secondary);
+        }
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+        .cta-content .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .cta-content .cta-buttons .btn-primary {
+            padding: 16px 38px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+        }
+        .cta-content .cta-buttons .btn-outline-light {
+            padding: 16px 38px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 1rem;
+        }
+        .cta-content .cta-buttons .btn-outline-light:hover {
+            background: #fff;
+            color: #111827;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(255, 255, 255, 0.15);
+        }
+        .cta-content .cta-stats-mini {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .cta-content .cta-stats-mini div {
+            text-align: center;
+        }
+        .cta-content .cta-stats-mini div strong {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--brand-secondary);
+            font-family: 'Inter', sans-serif;
+        }
+        .cta-content .cta-stats-mini div span {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            .cta-content .cta-stats-mini {
+                gap: 20px;
+            }
+        }
+
+        /* ============================================================= */
+        /* FOOTER (exact match)                                           */
+        /* ============================================================= */
+        footer {
+            background: var(--footer-bg);
+            color: #a0aebb;
+            padding: 80px 20px;
+            margin-top: auto;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .footer-title {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-list {
+            list-style: none;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-list li a {
+            transition: var(--transition);
+        }
+        .footer-list li a:hover {
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: var(--brand-primary);
+        }
+        .footer-grid .logo i {
+            color: var(--brand-secondary);
+        }
+        .footer-grid>div:first-child p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #2a1f4a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .footer-social a:hover {
+            background: var(--brand-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .service-card .card-media {
+                height: 180px;
+            }
+            .service-card .card-icon-overlay {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+                bottom: -24px;
+                right: 16px;
+            }
+            .service-card .card-body {
+                padding: 24px 18px 22px;
+            }
+            .service-card .card-body h3 {
+                font-size: 1.2rem;
+            }
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================================= -->
+    <!-- HEADER / NAVBAR (exact match)                             -->
+    <!-- ========================================================= -->
+    <header class="header-nav">
+        <nav class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+
+            <div class="desktop-menu">
+                <div class="dropdown">
+                    <a href="#">Home <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html">Home 1</a>
+                        <a href="home2.html">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="packages.html">Packages</a>
+        <a href="booking.html">Booking</a>
+
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="nav-controls">
+                <button id="themeToggle" class="btn-ghost"><i class="fas fa-moon"></i></button>
+                <button id="rtlToggle" class="btn-ghost" style="font-weight: bold; font-size: 0.7rem;">RTL</button>
+                <a href="signin.html" class="btn-primary">LOG IN</a>
+            </div>
+
+            <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-overlay" id="navOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+        <button id="closeDrawer" style="background:none; border:none; font-size:1.5rem; align-self:flex-end; color:var(--brand-primary);">✕</button>
+        <a href="index.html">Home1</a>
+        <a href="home2.html" >Home2</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="packages.html">Packages</a>
+<a href="booking.html">Booking</a>
+
+        <a href="contact.html">Contact</a>
+        <div style="margin-top: auto; border-top: 1px solid #e5e7eb; padding-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <button id="mobileThemeToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle Theme</button>
+            <button id="mobileRtlToggle" style="padding: 10px; background: #f3f4f6; color: #111827; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Toggle RTL</button>
+            <a href="signin.html" class="btn-primary" style="text-align: center;">LOG IN</a>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 1: SERVICES HERO                                  -->
+    <!-- ========================================================= -->
+    <section class="services-hero">
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        <div class="services-hero-content fade-up">
+            <div class="hero-badge"><i class="fas fa-camera-retro"></i> &nbsp;What We Offer</div>
+            <h1>Professional <span>Photography</span> <br>Services</h1>
+            <p>From intimate weddings to high-energy festivals, we bring a tailored approach to every shoot. Explore our range of services — each designed to tell your unique story.</p>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2: SERVICES CARDS — 6 UNIQUE DESIGNS              -->
+    <!-- ========================================================= -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <p class="section-subtitle">Every service is crafted with care, blending technical excellence with creative vision. Choose the experience that fits your needs.</p>
+
+            <div class="services-grid">
+
+                <!-- Card 1: Wedding — Elegant -->
+                <div class="service-card style-wedding fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Wedding Photography</h3>
+                        <p>Timeless storytelling through candid moments, golden-hour portraits, and emotional details. We capture the essence of your love story from start to finish.</p>
+                        <span class="price-tag">From $2,800</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> 8+ hrs coverage</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Corporate — Sleek -->
+                <div class="service-card style-corporate fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Corporate Events</h3>
+                        <p>Professional coverage for galas, conferences, and brand activations. We deliver polished imagery that elevates your corporate identity and event presence.</p>
+                        <span class="price-tag">From $1,900</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> Full-day coverage</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Portrait — Artistic -->
+                <div class="service-card style-portrait fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Portrait Sessions</h3>
+                        <p>Personal branding, headshots, and creative portraits that reveal your authentic self. We work with natural light and studio setups to craft stunning imagery.</p>
+                        <span class="price-tag">From $450</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> 2 hrs session</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Festival — Vibrant -->
+                <div class="service-card style-festival fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Festival &amp; Concert</h3>
+                        <p>High-energy coverage of music festivals, concerts, and live performances. We capture the raw energy, crowd interactions, and backstage moments.</p>
+                        <span class="price-tag">From $1,500</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> Full event</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Product — Minimalist -->
+                <div class="service-card style-product fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Product Photography</h3>
+                        <p>Clean, compelling product shots for e-commerce, catalogs, and branding. We use studio lighting and creative compositions to make your products shine.</p>
+                        <span class="price-tag">From $350</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> Per product</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Documentary — Storytelling -->
+                <div class="service-card style-documentary fade-up">
+                    <div class="card-media">
+                    </div>
+                    <div class="card-body">
+                        <h3>Documentary &amp; Editorial</h3>
+                        <p>Long-form visual storytelling for brands, nonprofits, and publications. We create authentic narratives that resonate with your audience and mission.</p>
+                        <span class="price-tag">From $2,200</span>
+                        <div class="card-footer">
+                            <div class="feature-list">
+                                <span><i class="fas fa-check-circle"></i> Multi-day</span>
+                            </div>
+                            <button class="btn-small">view more</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 3: WHY US / FEATURES STRIP                        -->
+    <!-- ========================================================= -->
+    <section class="features-strip">
+        <div class="strip-grid">
+            <div class="strip-item">
+                <i class="fas fa-crown"></i>
+                <h4>Award-Winning Team</h4>
+                <p>Recognized for excellence in event photography worldwide.</p>
+            </div>
+            <div class="strip-item">
+                <i class="fas fa-clock"></i>
+                <h4>On-Time Delivery</h4>
+                <p>Your memories delivered within 2 weeks, always on schedule.</p>
+            </div>
+            <div class="strip-item">
+                <i class="fas fa-heart"></i>
+                <h4>Passion for Detail</h4>
+                <p>Every image is meticulously edited to perfection.</p>
+            </div>
+            <div class="strip-item">
+                <i class="fas fa-globe"></i>
+                <h4>Global Coverage</h4>
+                <p>Available for destination events worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 4: CALL TO ACTION                                  -->
+    <!-- ========================================================= -->
+    <section class="cta-section">
+        <div class="cta-glow"></div>
+        <div class="cta-glow-2"></div>
+        <div class="cta-content">
+            <h2>Let's Bring Your <span>Vision</span> <br>to Life</h2>
+            <p>Ready to book your session or have questions about our services? We're here to help you choose the perfect package for your event.</p>
+            <div class="cta-buttons">
+                <a href="book.html" class="btn-primary"><i class="fas fa-calendar-check"></i> &nbsp;Book a Session</a>
+                <a href="contact.html" class="btn-outline-light"><i class="fas fa-comment"></i> &nbsp;Get in Touch</a>
+            </div>
+            <div class="cta-stats-mini">
+                <div>
+                    <strong>50+</strong>
+                    <span>Weddings / Year</span>
+                </div>
+                <div>
+                    <strong>120+</strong>
+                    <span>Corporate Events</span>
+                </div>
+                <div>
+                    <strong>4.9★</strong>
+                    <span>Average Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER (exact match)                                       -->
+    <!-- ========================================================= -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo"><i class="fas fa-camera"></i> LensPro</a>
+                <p style="font-size: 0.9rem; line-height: 1.6;">Where artistry meets professionalism. We capture the moments that matter most, creating timeless visual stories for weddings, corporate events, and personal milestones.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="#">Packages</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Support</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-list">
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-envelope"></i> hello@lenspro.com</li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 0.8rem; border-top: 1px solid #2a1f4a; padding-top: 20px;">
+            &copy; 2026 LensPro. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- SCRIPTS                                                    -->
+    <!-- ========================================================= -->
+    <script>
+        // ===== THEME TOGGLE =====
+        const toggleTheme = () => {
+            document.body.classList.toggle('dark');
+            const icon = document.querySelector('#themeToggle i');
+            if (document.body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        };
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('mobileThemeToggle').addEventListener('click', toggleTheme);
+
+        // ===== RTL TOGGLE =====
+        const toggleRTL = () => {
+            document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+        };
+        document.getElementById('rtlToggle').addEventListener('click', toggleRTL);
+        document.getElementById('mobileRtlToggle').addEventListener('click', toggleRTL);
+
+        // ===== MOBILE MENU =====
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeDrawer');
+        const drawer = document.getElementById('mobileDrawer');
+        const overlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        const closeMenu = () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+        };
+
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== "INQUIRE" BUTTON ALERT (demo) =====
+        document.querySelectorAll('.btn-small').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.service-card');
+                const title = card.querySelector('h3')?.textContent || 'this service';
+                alert('📷 Thank you for your interest in ' + title + '!\nOur team will reach out shortly with more details.');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
