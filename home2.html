@@ -367,7 +367,7 @@
         }
 
         /* ========================================================= */
-        /* SECTION 1: FEATURED SERVICES (~75 Lines of HTML/CSS)      */
+        /* SECTION 1: FEATURED SERVICES                              */
         /* ========================================================= */
         .services-section { background-color: #faf5ff; }
         .dark .services-section { background-color: var(--dark-bg); }
@@ -436,7 +436,7 @@
         }
 
         /* ========================================================= */
-        /* SECTION 2: Portfolio GALLERY (~75 Lines of HTML/CSS)      */
+        /* SECTION 2: Portfolio GALLERY                              */
         /* ========================================================= */
         .gallery-section { background-color: #fff; }
         .dark .gallery-section { background-color: #0F0A1A; }
@@ -493,7 +493,7 @@
         }
 
         /* ========================================================= */
-        /* SECTION 3: CLIENT TESTIMONIALS (~80 Lines of HTML/CSS)    */
+        /* SECTION 3: CLIENT TESTIMONIALS                            */
         /* ========================================================= */
         .testi-section { background-color: #faf5ff; }
         .dark .testi-section { background-color: var(--dark-bg); }
@@ -553,7 +553,7 @@
         }
 
         /* ========================================================= */
-        /* SECTION 4: WHY CHOOSE US (~75 Lines of HTML/CSS)          */
+        /* SECTION 4: WHY CHOOSE US                                  */
         /* ========================================================= */
         .why-section { background-color: #fff; }
         .dark .why-section { background-color: #0F0A1A; }
@@ -608,7 +608,7 @@
         .dark .why-text p { color: #a0aebb; }
 
         /* ========================================================= */
-        /* SECTION 5: CTA / NEWSLETTER (~75 Lines of HTML/CSS)       */
+        /* SECTION 5: CTA / NEWSLETTER                               */
         /* ========================================================= */
         .cta-section {
             background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
@@ -789,6 +789,23 @@
                 padding-top: 110px;
                 padding-bottom: 50px;
             }
+            
+            /* Hide the decorative grid lines/symbols on mobile */
+            .about-hero::before,
+            .about-hero::after {
+                display: none;
+            }
+
+            /* Adjust layout to span full width */
+            .about-hero .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            /* Hide the 3 images section on mobile */
+            .about-hero .hero-visual {
+                display: none;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
