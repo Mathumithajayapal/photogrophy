@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -9,18 +9,19 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
             --brand-primary: #8B5CF6;
-            --brand-secondary: #E8B4A0;
-            --brand-light: #A78BFA;
+            --brand-secondary: #6D28D9;
+            --brand-light: #7C3AED;
             --brand-dark: #6D28D9;
             --footer-bg: #1E1B2E;
             --dark-bg: #0F0A1A;
             --dark-card: #1A142F;
-            --gold: #FCD34D;
+            --gold: #5B21B6;
         }
 
         /* ===== RESET & BASE ===== */
@@ -80,7 +81,7 @@
         }
         .desktop-menu {
             display: none;
-            gap: 20px;
+            gap: 32px;
             font-weight: 500;
         }
         @media (min-width: 1024px) {
@@ -91,7 +92,7 @@
         .nav-controls {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         @media (min-width: 1024px) {
             .nav-controls {
@@ -276,8 +277,8 @@
         /* HERO BANNER SECTION                                       */
         /* ========================================================= */
         .about-hero {
-            padding-top: 130px;
-            padding-bottom: 80px;
+            min-height: 100vh; display: flex; align-items: center; padding-top: 90px;
+            padding-bottom: 90px;
             background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 50%, #2a1f4a 100%);
             color: #fff;
             position: relative;
@@ -320,7 +321,7 @@
             margin-bottom: 20px;
         }
         .about-hero .hero-text h1 span {
-            color: var(--brand-secondary);
+            color: #fff; opacity: 0.85;
         }
         .about-hero .hero-text p {
             font-size: 1.15rem;
@@ -341,7 +342,7 @@
             font-weight: 500;
         }
         .about-hero .hero-badge i {
-            color: var(--brand-secondary);
+            color: #fff;
         }
         .about-hero .hero-visual {
             display: grid;
@@ -656,8 +657,8 @@
             padding: 15px 35px;
             border-radius: 50px;
             border: none;
-            background-color: var(--brand-secondary);
-            color: #111827;
+            background: var(--brand-primary);
+            color: #fff;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
@@ -667,8 +668,76 @@
         .cta-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background-color: var(--gold);
+            background: var(--brand-dark);
         }
+
+        /* ========================================================= */
+        /* NEW SECTION A: PACKAGES PREVIEW                           */
+        /* ========================================================= */
+        .pkg-section { background: #faf5ff; }
+        .dark .pkg-section { background: var(--dark-bg); }
+        .pkg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .pkg-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 36px 28px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.4s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            position: relative; overflow: hidden;
+        }
+        .dark .pkg-card { background: var(--dark-card); border-color: #2a1f4a; }
+        .pkg-card.popular { border-color: var(--brand-primary); box-shadow: 0 14px 40px rgba(139,92,246,0.2); }
+        .pkg-card.popular::after { content: "Best Value"; position: absolute; top: 18px; right: -30px; background: var(--brand-primary); color: #fff; padding: 5px 44px; font-size: 0.72rem; font-weight: 700; transform: rotate(45deg); letter-spacing: 1px; }
+        .pkg-card:hover { transform: translateY(-8px); border-color: var(--brand-primary); box-shadow: 0 20px 45px rgba(139,92,246,0.18); }
+        .pkg-icon { font-size: 2.5rem; margin-bottom: 14px; }
+        .pkg-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .pkg-price { font-size: 2.4rem; font-weight: 800; color: var(--brand-primary); line-height: 1; margin-bottom: 6px; }
+        .pkg-price span { font-size: 0.9rem; font-weight: 400; color: #888; }
+        .pkg-desc { color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 24px; }
+        .dark .pkg-desc { color: #a0aebb; }
+
+        /* ========================================================= */
+        /* NEW SECTION B: BEHIND THE LENS (PROCESS SPLIT)            */
+        /* ========================================================= */
+        .lens-section { background: #fff; }
+        .dark .lens-section { background: #0F0A1A; }
+        .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        @media(max-width:768px) { .lens-grid { grid-template-columns: 1fr; } }
+        .lens-img { width: 100%; border-radius: 28px; box-shadow: 0 24px 50px rgba(0,0,0,0.12); transition: 0.4s; }
+        .lens-img:hover { transform: scale(1.02); }
+        .dark .lens-img { box-shadow: 0 24px 50px rgba(0,0,0,0.5); }
+        .lens-content h2 { font-size: 2.4rem; margin-bottom: 18px; }
+        .lens-content h2 span { color: var(--brand-primary); }
+        .lens-content p { color: #555; line-height: 1.8; font-size: 1.05rem; margin-bottom: 28px; }
+        .dark .lens-content p { color: #b0b8c8; }
+        .lens-steps { display: flex; flex-direction: column; gap: 16px; }
+        .lens-step { display: flex; gap: 16px; align-items: flex-start; }
+        .lens-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand-primary); margin-top: 7px; flex-shrink: 0; box-shadow: 0 0 0 4px rgba(139,92,246,0.15); }
+        .lens-step-text h4 { font-size: 1.05rem; margin-bottom: 3px; }
+        .lens-step-text p { color: #666; font-size: 0.9rem; line-height: 1.5; margin: 0; }
+        .dark .lens-step-text p { color: #a0aebb; }
+
+        /* ========================================================= */
+        /* NEW SECTION C: STATS COUNTER STRIP                        */
+        /* ========================================================= */
+        .stats-strip {
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 60%, #c084fc 100%);
+            padding: 70px 20px; color: #fff;
+        }
+        .stats-inner {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px; text-align: center;
+        }
+        .stat-item .stat-num { font-size: 3.5rem; font-weight: 800; font-family: 'Playfair Display', serif; line-height: 1; color: #ffffff; }
+        .stat-item .stat-label { font-size: 1rem; font-weight: 600; opacity: 0.9; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-item .stat-desc { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
 
         /* ===== FOOTER ===== */
         footer {
@@ -741,6 +810,15 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
         }
+
+                /* ----- NAV LINK BASE STYLES ----- */
+        .desktop-menu > a,
+        .desktop-menu .dropdown > a {
+            padding: 8px 2px;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .desktop-menu > a:hover { color: var(--brand-primary); }
 
         /* ===== ACTIVE NAV LINK ===== */
         .desktop-menu a {
@@ -888,13 +966,39 @@
                 </p>
                 <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:10px;">
                     <a href="Portfolio.html" class="btn-primary" style="padding:12px 32px;">View Portfolio <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
-                    <a href="services.html" class="hero-outline-btn" style="border-color:var(--brand-secondary); color:#fff; padding:12px 32px; border: 1px solid; border-radius: 9999px; text-decoration: none;">Our Services</a>
+                    <a href="services.html" class="hero-outline-btn" style="border-color:rgba(255,255,255,0.6); color:#fff; padding:12px 32px; border: 1px solid; border-radius: 9999px; text-decoration: none;">Our Services</a>
                 </div>
             </div>
             <div class="hero-visual">
                 <img src="image/photos (1).jpg" class="img-tall" alt="Wedding celebration">
                 <img src="image/concert.jpg" alt="Live event photography">
                 <img src="image/camera (3).jpg" alt="Creative portrait">
+            </div>
+        </div>
+    </section>
+    <!-- NEW SECTION C: STATS COUNTER STRIP                        -->
+    <!-- ========================================================= -->
+    <section class="stats-strip">
+        <div class="stats-inner">
+            <div class="stat-item">
+                <div class="stat-num" data-target="500">0</div>
+                <div class="stat-label">Events Covered</div>
+                <div class="stat-desc">Weddings, galas, festivals &amp; more</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-target="98">0</div>
+                <div class="stat-label">Client Satisfaction</div>
+                <div class="stat-desc">Based on post-event surveys</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-target="12">0</div>
+                <div class="stat-label">Awards Won</div>
+                <div class="stat-desc">National &amp; international recognition</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-target="48">0</div>
+                <div class="stat-label">Hour Delivery</div>
+                <div class="stat-desc">Sneak peek turnaround time</div>
             </div>
         </div>
     </section>
@@ -1064,6 +1168,72 @@
     </section>
 
     <!-- ========================================================= -->
+    <!-- NEW SECTION A: PACKAGES PREVIEW                            -->
+    <!-- ========================================================= -->
+    <section class="pkg-section">
+        <div class="container">
+            <h2 class="section-title">Our <span>Packages</span></h2>
+            <p class="section-subtitle">Transparent pricing crafted to suit every occasion — no surprises, just stunning photos.</p>
+            <div class="pkg-grid">
+                <div class="pkg-card">
+                    <div class="pkg-icon">📸</div>
+                    <h3>Essential</h3>
+                    <div class="pkg-price">$399<span>/session</span></div>
+                    <p class="pkg-desc">Ideal for small events, birthdays, and intimate family gatherings with a 3-hour shoot.</p>
+                    <a href="packages.html" class="btn-primary">View Details</a>
+                </div>
+                <div class="pkg-card popular">
+                    <div class="pkg-icon">🌟</div>
+                    <h3>Premium</h3>
+                    <div class="pkg-price">$799<span>/event</span></div>
+                    <p class="pkg-desc">Full-day wedding or corporate event coverage with 400+ edited photos and sneak peeks.</p>
+                    <a href="packages.html" class="btn-primary">View Details</a>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-icon">🏰</div>
+                    <h3>Elite</h3>
+                    <div class="pkg-price">$1299<span>/event</span></div>
+                    <p class="pkg-desc">Two photographers, video highlights, 800+ photos, and a premium printed album included.</p>
+                    <a href="packages.html" class="btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- NEW SECTION B: BEHIND THE LENS                            -->
+    <!-- ========================================================= -->
+    <section class="lens-section">
+        <div class="container">
+            <div class="lens-grid">
+                <img src="image/program (3).jpg" alt="Photographer at work" class="lens-img">
+                <div class="lens-content">
+                    <h2>Behind <span>the Lens</span></h2>
+                    <p>We don't just show up and shoot — every LensPro session is the result of careful planning, open communication, and genuine passion for the craft.</p>
+                    <div class="lens-steps">
+                        <div class="lens-step">
+                            <div class="lens-dot"></div>
+                            <div class="lens-step-text"><h4>Discovery Call</h4><p>We learn everything about your event, vision, and must-have shots.</p></div>
+                        </div>
+                        <div class="lens-step">
+                            <div class="lens-dot"></div>
+                            <div class="lens-step-text"><h4>Location Scout</h4><p>We visit your venue to plan the best angles, lighting, and timing.</p></div>
+                        </div>
+                        <div class="lens-step">
+                            <div class="lens-dot"></div>
+                            <div class="lens-step-text"><h4>Shoot Day</h4><p>We arrive early, blend into the atmosphere, and capture pure, authentic moments.</p></div>
+                        </div>
+                        <div class="lens-step">
+                            <div class="lens-dot"></div>
+                            <div class="lens-step-text"><h4>Gallery Delivery</h4><p>Your private, beautifully edited gallery is ready within 14 days.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================================= -->
     <!-- FOOTER                                                    -->
     <!-- ========================================================= -->
     <footer>
@@ -1097,7 +1267,7 @@
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
@@ -1155,6 +1325,24 @@
 
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
+
+        // Stats counter animation
+        const counters = document.querySelectorAll('.stat-num');
+        const animateCounter = (el) => {
+            const target = +el.dataset.target;
+            const suffix = el.dataset.suffix || '';
+            let current = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(timer); }
+                el.textContent = current + suffix;
+            }, 25);
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); observer.unobserve(e.target); } });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
     </script>
 
 </body>

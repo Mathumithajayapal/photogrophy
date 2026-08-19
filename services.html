@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -9,13 +9,14 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
             --brand-primary: #8B5CF6;
-            --brand-secondary: #E8B4A0;
-            --brand-light: #A78BFA;
+            --brand-secondary: #6D28D9;
+            --brand-light: #7C3AED;
             --brand-dark: #6D28D9;
             --footer-bg: #1E1B2E;
             --dark-bg: #0F0A1A;
@@ -62,21 +63,6 @@
             display: block;
         }
 
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--brand-primary);
-            border-radius: 10px;
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: #1a142f;
-        }
-
         /* ===== HEADER / NAVBAR ===== */
         .header-nav {
             position: fixed;
@@ -107,7 +93,7 @@
         }
         .desktop-menu {
             display: none;
-            gap: 20px;
+            gap: 32px;
             font-weight: 500;
         }
         @media (min-width: 1024px) {
@@ -118,7 +104,7 @@
         .nav-controls {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         @media (min-width: 1024px) {
             .nav-controls {
@@ -341,6 +327,15 @@
             color: #a0aebb;
         }
 
+                /* ----- NAV LINK BASE STYLES ----- */
+        .desktop-menu > a,
+        .desktop-menu .dropdown > a {
+            padding: 8px 2px;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .desktop-menu > a:hover { color: var(--brand-primary); }
+
         /* ===== ACTIVE NAV LINK ===== */
         .desktop-menu a {
             position: relative;
@@ -405,7 +400,7 @@
         /* SERVICES HERO                                                  */
         /* ============================================================= */
         .services-hero {
-            padding: 160px 20px 90px;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 90px 20px;
             background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 50%, #2D1B4E 100%);
             position: relative;
             overflow: hidden;
@@ -435,7 +430,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(232, 180, 160, 0.15), transparent 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
             bottom: -200px;
             left: -200px;
             pointer-events: none;
@@ -448,14 +443,14 @@
         }
         .services-hero .hero-badge {
             display: inline-block;
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             padding: 8px 24px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-            color: var(--brand-light);
+            color: #fff;
             margin-bottom: 20px;
             backdrop-filter: blur(4px);
         }
@@ -465,7 +460,7 @@
             margin-bottom: 20px;
         }
         .services-hero h1 span {
-            color: var(--brand-secondary);
+            color: #fff; opacity: 0.85;
         }
         .services-hero p {
             font-size: 1.15rem;
@@ -628,16 +623,16 @@
             background-image: url('image/photos (11).jpg');
         }
         .service-card.style-wedding .card-icon-overlay {
-            background: linear-gradient(135deg, #E8B4A0, #D4947A);
+            background: linear-gradient(135deg, #6D28D9, #5B21B6);
         }
         .service-card.style-wedding .card-body h3 {
-            color: #D4947A;
+            color: #5B21B6;
         }
         .dark .service-card.style-wedding .card-body h3 {
             color: var(--brand-secondary);
         }
         .service-card.style-wedding .card-body .card-footer .btn-small {
-            background: linear-gradient(135deg, #E8B4A0, #D4947A);
+            background: linear-gradient(135deg, #6D28D9, #5B21B6);
         }
 
         /* Card 2: Corporate — Sleek, blue-toned */
@@ -1279,7 +1274,7 @@
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>

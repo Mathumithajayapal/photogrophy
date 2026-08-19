@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -9,18 +9,19 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
             --brand-primary: #8B5CF6;
-            --brand-secondary: #E8B4A0;
-            --brand-light: #A78BFA;
+            --brand-secondary: #6D28D9;
+            --brand-light: #7C3AED;
             --brand-dark: #6D28D9;
             --footer-bg: #1E1B2E;
             --dark-bg: #0F0A1A;
             --dark-card: #1A142F;
-            --gold: #FCD34D;
+            --gold: #5B21B6;
         }
 
         /* ===== RESET & BASE ===== */
@@ -83,7 +84,7 @@
         }
         .desktop-menu {
             display: none;
-            gap: 20px;
+            gap: 32px;
             font-weight: 500;
         }
         @media (min-width: 1024px) {
@@ -94,7 +95,7 @@
         .nav-controls {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         @media (min-width: 1024px) {
             .nav-controls {
@@ -274,8 +275,8 @@
         /* SECTION 1: ABOUT HERO (FRESH DESIGN)                      */
         /* ========================================================= */
         .about-hero {
-            padding-top: 130px;
-            padding-bottom: 80px;
+            min-height: 100vh; display: flex; align-items: center; padding-top: 90px;
+            padding-bottom: 90px;
             background: linear-gradient(135deg, #0F0A1A 0%, #1A142F 50%, #2a1f4a 100%);
             color: #fff;
             position: relative;
@@ -318,7 +319,7 @@
             margin-bottom: 20px;
         }
         .about-hero .hero-text h1 span {
-            color: var(--brand-secondary);
+            color: #fff; opacity: 0.85;
         }
         .about-hero .hero-text p {
             font-size: 1.15rem;
@@ -339,7 +340,7 @@
             font-weight: 500;
         }
         .about-hero .hero-badge i {
-            color: var(--brand-secondary);
+            color: #fff;
         }
         .about-hero .hero-visual {
             display: grid;
@@ -706,6 +707,76 @@
             }
         }
 
+        /* ========================================================= */
+        /* NEW SECTION A: AWARDS & RECOGNITION                       */
+        /* ========================================================= */
+        .awards-section { background: linear-gradient(135deg, #faf5ff 0%, #f3eeff 100%); }
+        .dark .awards-section { background: var(--dark-bg); }
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+        }
+        .award-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 22px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            border-bottom: 4px solid transparent;
+        }
+        .dark .award-card { background: var(--dark-card); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .award-card:hover { transform: translateY(-8px); border-bottom-color: var(--brand-secondary); box-shadow: 0 20px 45px rgba(139,92,246,0.15); }
+        .award-icon { font-size: 2.8rem; color: var(--gold); margin-bottom: 14px; }
+        .award-card h3 { font-size: 1.15rem; margin-bottom: 6px; }
+        .award-card span { font-size: 0.85rem; color: var(--brand-primary); font-weight: 600; }
+        .award-year { display: block; font-size: 0.8rem; color: #888; margin-top: 4px; }
+        .dark .award-year { color: #8892a0; }
+
+        /* ========================================================= */
+        /* NEW SECTION B: FAQ ACCORDION                              */
+        /* ========================================================= */
+        .faq-section { background: #fff; }
+        .dark .faq-section { background: var(--dark-bg); }
+        .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+        .faq-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .dark .faq-item { border-color: #2a1f4a; }
+        .faq-item:hover { border-color: var(--brand-primary); }
+        .faq-question {
+            width: 100%; background: none; border: none; text-align: left;
+            padding: 22px 24px; font-size: 1.05rem; font-weight: 600;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            color: inherit; font-family: inherit;
+        }
+        .faq-question i { color: var(--brand-primary); transition: 0.3s; }
+        .faq-answer { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+        .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 22px; }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer p { color: #555; line-height: 1.7; font-size: 0.97rem; }
+        .dark .faq-answer p { color: #b0b8c8; }
+
+        /* ========================================================= */
+        /* NEW SECTION C: NEWSLETTER CTA                             */
+        /* ========================================================= */
+        .nl-cta-section {
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
+            padding: 90px 20px; text-align: center; color: #fff;
+        }
+        .nl-inner { max-width: 620px; margin: 0 auto; }
+        .nl-inner h2 { font-size: 2.8rem; margin-bottom: 16px; line-height: 1.2; }
+        .nl-inner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 36px; line-height: 1.6; }
+        .nl-form { display: flex; gap: 10px; max-width: 500px; margin: 0 auto; }
+        @media(max-width:580px) { .nl-form { flex-direction: column; } .nl-inner h2 { font-size: 2.1rem; } }
+        .nl-input { flex: 1; padding: 15px 24px; border-radius: 50px; border: none; outline: none; font-size: 1rem; font-family: 'Inter', sans-serif; }
+        .nl-btn { padding: 15px 32px; border-radius: 50px; border: none; background: #fff; color: var(--brand-primary); font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .nl-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.2); background: rgba(255,255,255,0.9); }
+
         /* ===== FOOTER ===== */
         footer {
             background: var(--footer-bg);
@@ -777,6 +848,15 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
         }
+
+                /* ----- NAV LINK BASE STYLES ----- */
+        .desktop-menu > a,
+        .desktop-menu .dropdown > a {
+            padding: 8px 2px;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .desktop-menu > a:hover { color: var(--brand-primary); }
 
         /* ===== ACTIVE NAV LINK ===== */
         .desktop-menu a {
@@ -993,7 +1073,6 @@
                 </p>
                 <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:10px;">
                     <a href="#story" class="btn-primary" style="padding:12px 32px;">Our Story <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
-                    <a href="#team" class="hero-outline-btn" style="border-color:var(--brand-secondary); color:#fff; padding:12px 32px;">Meet the Team</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -1002,9 +1081,7 @@
                 <img src="image/camera (3).jpg" alt="Portrait">
             </div>
         </div>
-    </section>
-
-      <!-- ========================================================= -->
+    </section>  <!-- ========================================================= -->
     <!-- SECTION 5: MILESTONES / STATS — FRESH LAYOUT              -->
     <!-- ========================================================= -->
     <section class="milestones-section">
@@ -1035,6 +1112,8 @@
             </div>
         </div>
     </section>
+
+    
     <!-- ========================================================= -->
     <!-- SECTION 2: OUR STORY — TIMELINE NARRATIVE                 -->
     <!-- ========================================================= -->
@@ -1150,7 +1229,7 @@
                 <div class="team-card">
                     <img src="image/author (2).jpg" alt="Michael Chen" class="team-avatar">
                     <h3>Michael Chen</h3>
-                    <div class="team-role">Founder & Lead Photographer</div>
+                    <div class="team-role">Lead Photographer</div>
                     <p>15+ years of experience. Michael's eye for natural light and candid emotion defines the LensPro style.</p>
                     <div class="team-social">
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1171,16 +1250,16 @@
                     <img src="image/author (7).jpg" alt="David Kim" class="team-avatar">
                     <h3>David Kim</h3>
                     <div class="team-role">Senior Event Photographer</div>
-                    <p>David specializes in high-energy events — from corporate galas to music festivals — with a journalistic approach.</p>
+                    <p>David specializes in high-energy events — from corporate galas to music festivals.</p>
                     <div class="team-social">
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     </div>
                 </div>
                 <div class="team-card">
                     <img src="image/author (4).jpg" alt="Elena Voss" class="team-avatar">
                     <h3>Elena Voss</h3>
-                    <div class="team-role">Portrait & Branding Specialist</div>
+                    <div class="team-role">Branding Specialist</div>
                     <p>Elena's portraits are known for their warmth and authenticity, helping clients tell their personal stories.</p>
                     <div class="team-social">
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1193,6 +1272,84 @@
 
 
   
+
+    <!-- ========================================================= -->
+    <!-- NEW SECTION A: AWARDS & RECOGNITION                        -->
+    <!-- ========================================================= -->
+    <section class="awards-section">
+        <div class="container">
+            <h2 class="section-title">Awards &amp; <span>Recognition</span></h2>
+            <p class="section-subtitle">Honoured by industry leaders for our commitment to excellence and artistic innovation.</p>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">🏆</div>
+                    <h3>Best Photographer</h3>
+                    <span>National Photography Awards</span>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">🥇</div>
+                    <h3>Top Event Studio</h3>
+                    <span>EventPro Magazine</span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">🎖️</div>
+                    <h3>Creative Excellence</h3>
+                    <span>Lens &amp; Light Festival</span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-card">
+                    <div class="award-icon">⭐</div>
+                    <h3>5-Star Studio</h3>
+                    <span>Google &amp; Yelp Reviews</span>
+                    <span class="award-year">2022–2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- NEW SECTION B: FAQ ACCORDION                              -->
+    <!-- ========================================================= -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+            <p class="section-subtitle">Everything you need to know before booking your session with us.</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">How far in advance should I book? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>We recommend booking at least 3–6 months in advance for weddings and large events. For portraits and smaller sessions, 4–6 weeks is usually sufficient. Peak season (spring & fall) fills up fast!</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">What is your editing style? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Our signature style is warm, natural, and timeless — we enhance what's already beautiful without over-filtering. You'll love how authentic and vibrant every image feels.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How long until I receive my photos? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>You'll receive a sneak peek within 48 hours. The full edited gallery is typically delivered within 14 days for events and 7 days for portrait sessions.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you travel for destination events? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer"><p>Absolutely! We love destination events. Travel fees apply for locations beyond 50 miles. Contact us for a custom quote tailored to your destination.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- NEW SECTION C: NEWSLETTER CTA                             -->
+    <!-- ========================================================= -->
+    <section class="nl-cta-section">
+        <div class="nl-inner">
+            <h2>Stay Inspired. Stay <em>Connected.</em></h2>
+            <p>Subscribe for exclusive photography tips, behind-the-scenes stories, seasonal discounts, and early access to our booking calendar.</p>
+            <form class="nl-form" action="#" method="POST">
+                <input type="email" class="nl-input" placeholder="Your email address..." required>
+                <button type="submit" class="nl-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
 
     <!-- ========================================================= -->
     <!-- FOOTER (EXACT SAME AS ORIGINAL)                           -->
@@ -1228,7 +1385,7 @@
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
@@ -1280,6 +1437,16 @@
 
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
     </script>
 
 </body>

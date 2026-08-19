@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -9,13 +9,15 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 
     <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
             --brand-primary: #8B5CF6;
-            --brand-secondary: #E8B4A0;
-            --brand-light: #A78BFA;
+            --brand-secondary: #6D28D9;
+            --brand-light: #7C3AED;
             --brand-dark: #6D28D9;
             --footer-bg: #1E1B2E;
             --dark-bg: #0F0A1A;
@@ -82,7 +84,7 @@
         }
         .desktop-menu {
             display: none;
-            gap: 20px;
+            gap: 32px;
             font-weight: 500;
         }
         @media (min-width: 1024px) {
@@ -93,7 +95,7 @@
         .nav-controls {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         @media (min-width: 1024px) {
             .nav-controls {
@@ -313,7 +315,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 90px 20px;
+            box-sizing: border-box;
         }
         .booking-hero .hero-overlay {
             position: absolute;
@@ -344,7 +347,7 @@
             margin-bottom: 18px;
         }
         .booking-hero h1 span {
-            color: var(--brand-secondary);
+            color: #fff; opacity: 0.85;
         }
         .booking-hero p {
             max-width: 600px;
@@ -364,7 +367,7 @@
         }
         .booking-hero .hero-stats h2 {
             font-size: 2rem;
-            color: var(--brand-secondary);
+            color: #fff;
             font-family: 'Inter', sans-serif;
         }
         .booking-hero .hero-stats span {
@@ -373,8 +376,8 @@
         }
         @media (max-width: 768px) {
             .booking-hero {
-                height: auto;
-                padding: 160px 20px 70px;
+                height: 100vh;
+                padding: 90px 20px;
                 min-height: 500px;
             }
             .booking-hero h1 {
@@ -818,6 +821,15 @@
             margin-left: auto;
             margin-right: auto;
         }
+                /* ----- NAV LINK BASE STYLES ----- */
+        .desktop-menu > a,
+        .desktop-menu .dropdown > a {
+            padding: 8px 2px;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .desktop-menu > a:hover { color: var(--brand-primary); }
+
         /* ===== ACTIVE NAV LINK ===== */
         .desktop-menu a {
             position: relative;
@@ -1082,7 +1094,8 @@
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>

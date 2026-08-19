@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -14,8 +14,8 @@
         /* ===== ROOT VARIABLES ===== */
       :root{
     --brand-primary: #8B5CF6;   /* Royal Purple */
-    --brand-secondary:  #E8B4A0; /* Luxury Gold */
-    --brand-light: #A78BFA;
+    --brand-secondary: #6D28D9; /* Luxury Gold */
+    --brand-light: #7C3AED;
     --brand-dark: #6D28D9;
     --footer-bg: #1E1B2E;
     --dark-bg: #0F0A1A;
@@ -82,7 +82,7 @@
         }
         .desktop-menu {
             display: none;
-            gap: 20px;
+            gap: 32px;
             font-weight: 500;
         }
         @media (min-width: 1024px) {
@@ -93,7 +93,7 @@
         .nav-controls {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         @media (min-width: 1024px) {
             .nav-controls {
@@ -267,7 +267,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 20px;
+            padding: 20px;
         }
         .hero-overlay {
             position: absolute;
@@ -282,8 +282,8 @@
         }
         .hero-tag {
             display: inline-block;
-            background: var(--brand-secondary);
-            color: #111;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
             padding: 10px 25px;
             border-radius: 30px;
             font-weight: 600;
@@ -295,7 +295,7 @@
             margin-bottom: 25px;
         }
         .hero h1 span {
-            color: var(--brand-secondary);
+            color: #fff; opacity: 0.85;
         }
         .hero p {
             margin-bottom: 30px;
@@ -319,7 +319,7 @@
         }
         .hero-stats h2 {
             font-size: 2rem;
-            color: var(--brand-secondary);
+            color: #fff;
         }
         .hero-stats span {
             font-size: .95rem;
@@ -683,6 +683,15 @@
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
         }
 
+                /* ----- NAV LINK BASE STYLES ----- */
+        .desktop-menu > a,
+        .desktop-menu .dropdown > a {
+            padding: 8px 2px;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .desktop-menu > a:hover { color: var(--brand-primary); }
+
         /* ===== ACTIVE NAV LINK ===== */
         .desktop-menu a {
             position: relative;
@@ -767,7 +776,7 @@
     padding:14px 34px;
     background:transparent;
     color:#fff;
-    border:2px solid #FCD34D;
+    border:2px solid #7C3AED;
     border-radius:50px;
     font-size:16px;
     font-weight:700;
@@ -776,7 +785,7 @@
 }
 
 .hero-outline-btn:hover{
-    background: #E8B4A0;
+    background: #6D28D9;
     color:#111827;
     transform:translateY(-5px);
     box-shadow:0 18px 40px rgba(252,211,77,.45);
